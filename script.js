@@ -231,7 +231,9 @@ function setup() {
   setInterval(tempo, 1000);
 
 }
-
+String.prototype.limite = function(length) {
+  return this.length > length ? this.substring(0, length) + "..." : this;
+}
 
 function draw() {
   if (nome != Frase && Frase != "") {
@@ -273,7 +275,7 @@ function draw() {
   quantidade_pop = popula.length;
   quantidade_dinamica = quantidade_pop;
 
-  var str = "População: \n ";
+  var str = "População:\n";
   switch (População) {
     case População >= 500 && População < 800:
       quantidade_dinamica /= 2;
@@ -285,11 +287,15 @@ function draw() {
       quantidade_dinamica /= 5;
       break;
   }
-  for (i = 0; i < quantidade_dinamica / 2; i++) {
-    str = str + " " + popula[i].gene;
-    if (i % 20 == 0)
+  for (i = 0; i < quantidade_dinamica * 0.4; i++) {
+
+    str = str + " " + (popula[i].gene)
+      .limite(6);
+    if (i % 20 == 0 && i != 0)
       str = str + "\n";
   }
+  var tam = str.length;
+
   if (popula[0].gene == nome) {
     trigger = true;
   } else {
