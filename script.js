@@ -1,4 +1,4 @@
-﻿
+var elapsed = 0;﻿
 var popula = new Array();
 var geracao = 0;
 var quantidade_pop;
@@ -18,6 +18,7 @@ var MutaçãoMin = 0;
 var MutaçãoMax = 100;
 trigger = false;
 taxa = 0.01;
+
 
 
 String.prototype.replaceAt = function(index, character) {
@@ -199,6 +200,12 @@ function preload() {
   overpass = loadFont('overpass-mono-regular.otf')
 }
 
+function tempo() {
+  if (trigger == false) {
+    elapsed++;
+  }
+}
+
 function setup() {
   nome = "Hello World";
 
@@ -221,14 +228,17 @@ function setup() {
   gui = createGui('Opções');
   gui.addGlobals('Frase', 'População', 'Mutação');
   createCanvas(windowWidth, windowHeight);
+  setInterval(tempo, 1000);
 
 }
+
 
 function draw() {
   if (nome != Frase && Frase != "") {
     trigger = false;
     nome = Frase;
     popula.length = 0;
+    elapsed = 0;
     criar_pop(População, nome);
 
   }
@@ -236,12 +246,14 @@ function draw() {
     trigger = false;
     population = População;
     popula.length = 0;
+    elapsed = 0;
     criar_pop(População, nome);
   }
   if (População != population) {
     trigger = false;
     population = População;
     popula.length = 0;
+    elapsed = 0;
     criar_pop(População, nome);
   }
   if (nome != '') {
@@ -294,10 +306,8 @@ function draw() {
   text(str, 10, 380);
   fill(255, 255, 255);
   textFont(myFont);
-  textSize(25);
   textSize(64);
   text(popula[0].gene, (windowWidth - textWidth(popula[0].gene)) / 2, 340);
-  textSize(27);
   textSize(27);
   var fit = popula[0].fitness / 1000000;
   text("Geração: " + geracao, 10, 280);
@@ -306,5 +316,7 @@ function draw() {
   fill(255, 255, 255);
   var media_fit = (soma_fitness / quantidade_pop) / 1000000;
   text("Media de Fitness: " + media_fit.toFixed(2) + "%", 10, 255);
-
+  textSize(27);
+  textSize(20);
+  text('Tempo de Geração: ' + elapsed + ' segundo(s)', 240, 40);
 }
