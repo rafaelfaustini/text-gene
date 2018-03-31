@@ -313,7 +313,9 @@ function draw() {
   fill(255, 255, 255);
   textFont(myFont);
   textSize(64);
-  text(popula[0].gene, (windowWidth - textWidth(popula[0].gene)) / 2, 340);
+  let atual = (popula[0].gene)
+    .limite(25);
+  text(atual, (windowWidth - textWidth(atual)) / 2, 340);
   textSize(27);
   var fit = popula[0].fitness / 1000000;
   text("Geração: " + geracao, 10, 280);
