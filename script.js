@@ -151,16 +151,19 @@ function selecionar(soma) {
 
   peso_aleatorio2 = int(random(1, soma));
   quantidade_pop = popula.length;
+  var next = 0;
+  var seen = 0;
+  pai_index = 0;
+  mae_index = 0;
   for (i = 0; i < quantidade_pop; i++) {
-    peso_aleatorio = peso_aleatorio - popula[i].fitness;
-    if (peso_aleatorio <= 0) {
-      pai_index = 0;
-
+    next += popula[i].fitness;
+    if (seen < peso_aleatorio <= seen + next) {
+      pai_index = i;
+      break;
     }
-    peso_aleatorio2 = peso_aleatorio2 - popula[i].fitness;
-    if (peso_aleatorio2 <= 0) {
-      mae_index = 0;
-
+    if (seen < peso_aleatorio2 <= seen + next) {
+      mae_index = i;
+      break;
     }
   }
 
