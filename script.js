@@ -1,5 +1,6 @@
 var elapsed = 0;﻿
 var popula = new Array();
+var pensamento = new Array();
 var geracao = 0;
 var quantidade_pop;
 var tamanho_nome;
@@ -16,6 +17,8 @@ var overpass;
 var Mutação = 1;
 var MutaçãoMin = 0;
 var MutaçãoMax = 100;
+var soma = 0;
+var muta = 0.01;
 trigger = false;
 taxa = 0.01;
 
@@ -24,6 +27,67 @@ taxa = 0.01;
 String.prototype.replaceAt = function(index, character) {
   return this.substr(0, index) + character + this.substr(index + character.length);
 };
+
+function taxa_dinamica(tax) {
+  var tamanho_pensamento = pensamento.length;
+  var geracao_new = geracao / 10;
+
+  if (tamanho_pensamento > 1 && tamanho_pensamento < (geracao_new) && Number.isInteger(geracao_new)) {
+    if ((pensamento[geracao_new - 3].mediafit - pensamento[geracao_new - 2].mediafit) > 0) {
+      pulo = self.lista[geracao_new - 2].escolha;
+    }
+  }
+  if (Number.isInteger(geracao_new) && tamanho_pensamento < geracao_new) {
+    var lembranca = function(acao, mediafit) { // Colocar o objeto pessoa no vetor
+      this.acao = acao;
+      this.mediafit = mediafit;
+    };
+
+    elemento_pensamento = new lembranca;
+    soma /= 10;
+    elemento_pensamento.mediafit = soma;
+    soma = 0;
+    pulo = null;
+    escolha = int(random(0, 2));
+    console.log("Teste");
+    if (escolha == 0 || pulo == 0) {
+      elemento_pensamento.acao = 0;
+      pensamento.push(elemento_pensamento);
+      futuro = random(tax - (tax * 2), tax - 0.001);
+      console.log("Acho que preciso diminuir a mutação");
+      console.log(futuro);
+      muta = abs(futuro);
+      return futuro;
+    }
+    if (escolha == 1 || pulo == 1) {
+      elemento_pensamento.acao = 1;
+      pensamento.push(elemento_pensamento);
+      futuro = random(tax + 0.001, tax + (tax * 2));
+      console.log("Acho que preciso aumentar a mutação");
+      console.log(futuro);
+      muta = abs(futuro);
+      return futuro;
+    }
+    if (escolha == 2 || pulo == 2) {
+      elemento_pensamento.acao = 2;
+      pensamento.push(elemento_pensamento);
+      futuro = tax;
+      console.log("A mutação tá boa assim");
+      console.log(futuro);
+      muta = abs(futuro);
+      return futuro;
+    }
+
+
+
+
+
+
+
+  }
+  soma += popula[0].fitness
+  return tax;
+}
 
 function mutacao(dna, taxamt) {
   var tamanho_dna = dna.length;
@@ -177,7 +241,7 @@ function procriar() {
   tamanho_nome = nome.length;
   for (v = 0; v < quantidade_pop; v++) {
     selecionar(soma_pesos);
-    append(temp, mutacao(popula[pai_index].gene.substr(0, (tamanho_nome / 2)) + popula[mae_index].gene.substr(tamanho_nome / 2, tamanho_nome), Mutação / 100))
+    append(temp, mutacao(popula[pai_index].gene.substr(0, (tamanho_nome / 2)) + popula[mae_index].gene.substr(tamanho_nome / 2, tamanho_nome), taxa_dinamica(Mutação / 100)))
   }
 
 
@@ -330,4 +394,6 @@ function draw() {
   textSize(27);
   textSize(20);
   text('Tempo de Geração: ' + elapsed + ' segundo(s)', 240, 40);
+  text('Mutação Dinâmica: ' + (muta * 100) + '%', 240, 60);
+
 }
