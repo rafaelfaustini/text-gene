@@ -32,7 +32,7 @@ function taxa_dinamica(tax) {
       if(self.lista){
       pulo = self.lista[geracao_new - 2].escolha;
     } else {
-      console.log('Characters error')
+
     }
     }
   }
@@ -55,7 +55,7 @@ function taxa_dinamica(tax) {
         futuro = random(tax - (tax * 2), tax - 0.001);
          //console.log("Acho que preciso diminuir a mutação");
         //console.log(futuro);
-        muta = parseFloat(abs(futuro).toFixed(3));
+        muta = parseFloat(Math.abs(futuro).toFixed(3));
         return futuro.toFixed(3);
       case 1:
         elemento_pensamento.acao = 1;
@@ -71,7 +71,7 @@ function taxa_dinamica(tax) {
         futuro = tax;
         //console.log("A mutação tá boa assim");
         //console.log(futuro);
-        muta = parseFloat(abs(futuro).toFixed(3));
+        muta = parseFloat(Math.abs(futuro).toFixed(3));
         return futuro.toFixed(3);
     }
   }
@@ -83,7 +83,7 @@ function mutacao(dna, taxamt) {
   let tamanho_dna = dna.length;
   for (let i = 0; i < tamanho_dna; i++) {
     let tmp = random(1);
-    let char = floor(random(63, 122));
+    let char = Math.floor(random(63, 122));
     if (char === 63) char = 32;
     if (char === 64) char = 46;
     if (tmp < taxamt) {
@@ -186,7 +186,7 @@ function fitness() {
   for (i = 0; i < quantidade_pop; i++) {
     count += similarity(popula[i].gene, nome);
     count = (count * 100);
-    popula[i].fitness = pow(count,4);
+    popula[i].fitness = Math.pow(count,4);
     soma_fitness += popula[i].fitness;
     soma_pesos += count;
     count = 0;
@@ -208,8 +208,8 @@ function checar() {
 
 
 function selecionar(soma) {
-  peso_aleatorio = int(random(1, soma));
-  peso_aleatorio2 = int(random(1, soma));
+  peso_aleatorio = parseInt(random(1, soma));
+  peso_aleatorio2 = parseInt(random(1, soma));
   quantidade_pop = popula.length;
   let next = 0;
   let seen = 0;
@@ -237,11 +237,9 @@ function procriar() {
   tamanho_nome = nome.length;
   for (v = 0; v < quantidade_pop; v++) {
     selecionar(soma_pesos);
-    append(temp, mutacao(popula[pai_index].gene.substr(0, (tamanho_nome / 2)) + popula[mae_index].gene.substr(tamanho_nome / 2, tamanho_nome), taxa_dinamica(mutacao_l / 100)))
+    let tmp = mutacao(popula[pai_index].gene.substr(0, (tamanho_nome / 2)) + popula[mae_index].gene.substr(tamanho_nome / 2, tamanho_nome), taxa_dinamica(mutacao_l / 100));
+    append(temp, tmp)
   }
-
-
-
   for (i = 0; i < quantidade_pop; i++) {
 
     popula[i].gene = temp[i];
@@ -272,30 +270,23 @@ if(nome == ''){
   nome="Hello World";
 }
 reinicia();
-
 }
 
 function pop_slider(obj){
   document.getElementById("pop_label").innerHTML = "População: "+obj.value+" elementos";
   reinicia();
-
 }
 
 function setup() {
   nome = "Hello World";
-
-
-
   population = 1000;
   criar_pop(1000, nome);
   fitness();
-
   setInterval(tempo, 1000);
   noCanvas();
-
 }
 String.prototype.limite = function(length) {
-  return this.length > length ? this.substring(0, length) + "..." : this;
+  return this.length > length ? this.substring(0, length) + " " : this;
 }
 function keyPressed() {
     if(trigger){
@@ -305,6 +296,9 @@ function keyPressed() {
     }
 
 }
+
+  var tempos_grafico= new Array();
+
 function draw() {
 
 
@@ -335,20 +329,12 @@ function draw() {
 
   if (popula[0].gene == nome) {
     trigger = true;
-
-
   } else {
     trigger = false;
     procriar();
   }
-
-
-
     document.getElementById("list_popula").innerHTML = str;
-
-
-  let atual = (popula[0].gene)
-    .limite(25);
+  let atual = (popula[0].gene);
   document.getElementById("frase").innerHTML = atual
 
   let fit = popula[0].fitness / 1000000;
@@ -357,9 +343,9 @@ function draw() {
       .toFixed(2) + "%";
 
   let media_fit = (soma_fitness / quantidade_pop) / 1000000;
-  document.getElementById("media_fit").innerHTML = "Media de Fitness: " + media_fit.toFixed(2) + "%"
+document.getElementById("media_fit").innerHTML = "Media de Fitness: " + media_fit.toFixed(2) + "%"
 document.getElementById("tempo_geracao").innerHTML = 'Tempo de Geração: ' + elapsed + ' segundo(s)';
-document.getElementById("muta_din").innerHTML = 'Mutação Dinâmica: ' + (muta * 100) + '%';
 
+document.getElementById("muta_din").innerHTML = 'Mutação Dinâmica: ' + (muta * 100) + '%';
 
 }
