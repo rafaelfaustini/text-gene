@@ -253,10 +253,6 @@ function procriar() {
 }
 
 
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-}
-
 
 function tempo() {
   if (trigger == false) {
@@ -294,7 +290,6 @@ function setup() {
   criar_pop(1000, nome);
   fitness();
 
-  createCanvas(windowWidth, windowHeight);
   setInterval(tempo, 1000);
   noCanvas();
 
