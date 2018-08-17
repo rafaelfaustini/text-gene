@@ -1,14 +1,62 @@
 <html>
 <head>
  <meta charset = "UTF-8"/>
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.js"></script>
-  <script src="script.js"></script>
- <script src="quicksettings.js"></script>
- <script src="p5.gui.js"></script>
+ <!-- Font Awesome -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Bootstrap core CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.9/css/mdb.min.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="info-color">
+<div class="container">
+<div class="mt-5">
+  <div class="md-form form-lg">
+      <input type="text" id="inputAGBn" class="form-control form-control-lg text-white" value="Hello World" oninput="frase(this);">
+      <label for="inputAGBn" class="text-white" >Frase</label>
+  </div>
+  <label id="pop_label" class="text-white" for="pop">População: 1000 elementos</label>
+<input type="range" class="custom-range" id="populacao" min="100"  max="5000" value="1000" onchange="pop_slider(this)">
 
+
+<!-- Grid row -->
+
+<!-- Grid row -->
+<div class="form-group row text-white mt-4">
+    <!-- Default input -->
+    <h2 id="geracao" class="col-sm-5 col-form-label text-center mx-auto">Geração: </h2>
+        <h2 id="tempo_geracao" class="col-sm-5 col-form-label text-center mx-auto">Tempo de Geração: </h2>
+
+</div>
+<div class="form-group row text-white mt-4 ">
+    <!-- Default input -->
+    <label id="maior_fit" class="col-sm-3 col-form-label text-center mx-auto">Maior Fitness: </label>
+    <label id="media_fit" class="col-sm-3 col-form-label text-center mx-auto">Média de Fitness: </label>
+      <label id="muta_din" class="col-sm-3 col-form-label text-center mx-auto">Mutação Dinâmica: </label>
+
+</div>
+
+
+
+<div class="row text-center">
+        <h1 id="frase" class="text-center mx-auto mt-5 text-white display-1">Hello World </h1>
+</div>
+<p id="list_popula" class="text-white">População:</p>
+</div>
+</div>
+
+  <script src="script.js"></script>
+  <!-- JQuery -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.9/js/mdb.min.js"></script>
 </body>
 
 </html>
