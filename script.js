@@ -248,6 +248,10 @@ function procriar() {
   geracao += 1;
   fitness();
 
+  if(geracao< 500 || geracao%10)
+  addData( (popula[0].fitness/ 1000000).toFixed(2), geracao);
+
+
 }
 
 
