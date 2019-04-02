@@ -1,5 +1,6 @@
 # Text Gene
-![alt text](https://i.imgur.com/B9cQK4f.png "Text Gene")
+![text gene picture](https://i.imgur.com/yyQnv2t.png "Text Gene")
+
 An WEB application that uses genetic programming principles to guess the text you wrote.
 
 # Dinamic Mutation Rate
