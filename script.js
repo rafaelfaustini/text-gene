@@ -53,24 +53,22 @@ function taxa_dinamica(tax) {
         elemento_pensamento.acao = 0;
         pensamento.push(elemento_pensamento);
         futuro = random(tax - (tax * 2), tax - 0.001);
-         //console.log("Acho que preciso diminuir a mutação");
-        //console.log(futuro);
+         // Diminui a mutação
+
         muta = parseFloat(Math.abs(futuro)).toFixed(3);
         return futuro.toFixed(3);
       case 1:
         elemento_pensamento.acao = 1;
         pensamento.push(elemento_pensamento);
         futuro = random(tax + 0.001, tax + (tax * 2));
-        //console.log("Acho que preciso aumentar a mutação");
-        //console.log(futuro);
+        // Aumenta a mutação
         muta = parseFloat(abs(futuro)).toFixed(3);
         return futuro.toFixed(3);
        case 2:
         elemento_pensamento.acao = 2;
         pensamento.push(elemento_pensamento);
         futuro = tax;
-        //console.log("A mutação tá boa assim");
-        //console.log(futuro);
+        // Mantém a mutação
         muta = parseFloat(Math.abs(futuro)).toFixed(3);
         return futuro.toFixed(3);
     }
