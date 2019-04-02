@@ -48,10 +48,10 @@
 </div>
 <p id="list_popula" class="text-white">População:</p>
 </div>
-</div>
 
 
-<div class="row text-center mt-5 mb-5 ml-5"  style="position: relative; height:35vh; width:70vw">
+
+<div class="row text-center mt-5 mb-5"  style="position: relative; height:30vh; width:65vw">
 <canvas id="myChart" width="700" height="700"></canvas>
 </div>
 <script>
@@ -65,14 +65,14 @@ var data = {
             lineTension: 0.3,
             backgroundColor: "rgba(253,152,78,1)",
             borderColor: "rgba(255,255,255,1)",
-            borderCapStyle: 'butt',
+            borderCapStyle: 'round',
             borderDash: [],
             borderDashOffset: 0.0,
             borderJoinStyle: 'miter',
-            pointBorderColor: "rgba(110,179,0,1)",
+            pointBorderColor: "rgba(163,255,15,1)",
             pointBackgroundColor: "#fff",
-            pointBorderWidth: 10,
-            pointHoverRadius: 15,
+            pointBorderWidth: 15,
+            pointHoverRadius: 10,
             pointHoverBackgroundColor: "rgba(110,179,0,1)",
             pointHoverBorderColor: "rgba(220,220,220,1)",
             pointHoverBorderWidth: 2,
@@ -97,7 +97,6 @@ function addData(value,geracao){
   let gera = geracao;
   myLineChart.data.datasets[0].data[tamanhoAtual] = value;
   if (geracao == undefined) gera=1;
-  console.log(tamanhoAtual+" "+geracao);
   myLineChart.data.labels[tamanhoAtual] = gera;
   myLineChart.update();
 }
@@ -105,7 +104,7 @@ function addData(value,geracao){
 addData();
 </script>
 
-
+</div>
   <script src="script.js"></script>
 
   <!-- JQuery -->

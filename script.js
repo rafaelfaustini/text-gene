@@ -136,47 +136,20 @@ function dynamicSort(property) {
   }
 }
 
-function similarity(s1, s2) {
-  let longer = s1;
-  let shorter = s2;
 
-  if (s1.length < s2.length) {
-    longer = s2;
-    shorter = s1;
+function similaridade(s1, s2){
+var count = 0
+tamanho = s1.length;
+for(var i=0; i<tamanho; i++){
+  if(s1[i] == s2[i]){
+    count++;
   }
-  var longerLength = longer.length;
-  if (longerLength == 0) {
-    return 1.0;
-  }
-  return (longerLength - editDistance(longer, shorter)) / parseFloat(longerLength);
 }
 
-function editDistance(s1, s2) { // // O()
-
-  var costs = new Array();
-  let length_s1 = s1.length;
-  let length_s2 = s2.length;
-  for (let i = 0; i <= length_s1; i++) {
-    var lastValue = i;
-    for (let j = 0; j <= length_s2; j++) {
-      if (i == 0)
-        costs[j] = j;
-      else {
-        if (j > 0) {
-          var newValue = costs[j - 1];
-          if (s1.charAt(i - 1) != s2.charAt(j - 1))
-            newValue = Math.min(Math.min(newValue, lastValue),
-              costs[j]) + 1;
-          costs[j - 1] = lastValue;
-          lastValue = newValue;
-        }
-      }
-    }
-    if (i > 0)
-      costs[length_s2] = lastValue;
-  }
-  return costs[length_s2];
+porcentagem = (100*count) / tamanho;
+return porcentagem/100;
 }
+
 
 function fitness() {
   quantidade_pop = popula.length;
@@ -184,9 +157,9 @@ function fitness() {
   soma_fitness = 0;
   var count = 0;
   for (i = 0; i < quantidade_pop; i++) {
-    count += similarity(popula[i].gene, nome);
+    count += similaridade(popula[i].gene, nome);
     count = (count * 100);
-    popula[i].fitness = Math.pow(count,4);
+    popula[i].fitness = Math.pow(count,2);
     soma_fitness += popula[i].fitness;
     soma_pesos += count;
     count = 0;
@@ -248,8 +221,8 @@ function procriar() {
   geracao += 1;
   fitness();
 
-  if(geracao< 500 || geracao%10)
-  addData( (popula[0].fitness/ 1000000).toFixed(2), geracao);
+  if(geracao< 60 || geracao%10==0)
+  addData( (popula[0].fitness/ 10000).toFixed(2), geracao);
 
 
 }
@@ -305,7 +278,9 @@ function keyPressed() {
 
 function draw() {
 
-
+if(trigger){
+  noLoop();
+}
   quantidade_pop = popula.length;
   let quantidade_dinamica = quantidade_pop;
 
@@ -331,7 +306,7 @@ function draw() {
   var tam = str.length;
 
 
-  if (popula[0].gene == nome) {
+  if (popula[0].gene == nome || popula[0].fitness == 10000) {
     trigger = true;
   } else {
     trigger = false;
@@ -341,12 +316,12 @@ function draw() {
   let atual = (popula[0].gene);
   document.getElementById("frase").innerHTML = atual
 
-  let fit = popula[0].fitness / 1000000;
+  let fit = popula[0].fitness / 10000;
     document.getElementById("geracao").innerHTML = "Geração: " + geracao;
     document.getElementById("maior_fit").innerHTML = "Maior Fitness: " + (fit)
       .toFixed(2) + "%";
 
-  let media_fit = (soma_fitness / quantidade_pop) / 1000000;
+  let media_fit = (soma_fitness / quantidade_pop) / 100;
 document.getElementById("media_fit").innerHTML = "Media de Fitness: " + media_fit.toFixed(2) + "%"
 document.getElementById("tempo_geracao").innerHTML = 'Tempo de Geração: ' + elapsed + ' segundo(s)';
 
