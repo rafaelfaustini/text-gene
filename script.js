@@ -55,7 +55,7 @@ function taxa_dinamica(tax) {
         futuro = random(tax - (tax * 2), tax - 0.001);
          //console.log("Acho que preciso diminuir a mutação");
         //console.log(futuro);
-        muta = parseFloat(Math.abs(futuro).toFixed(3));
+        muta = parseFloat(Math.abs(futuro)).toFixed(3);
         return futuro.toFixed(3);
       case 1:
         elemento_pensamento.acao = 1;
@@ -63,7 +63,7 @@ function taxa_dinamica(tax) {
         futuro = random(tax + 0.001, tax + (tax * 2));
         //console.log("Acho que preciso aumentar a mutação");
         //console.log(futuro);
-        muta = parseFloat(abs(futuro).toFixed(3));
+        muta = parseFloat(abs(futuro)).toFixed(3);
         return futuro.toFixed(3);
        case 2:
         elemento_pensamento.acao = 2;
@@ -71,7 +71,7 @@ function taxa_dinamica(tax) {
         futuro = tax;
         //console.log("A mutação tá boa assim");
         //console.log(futuro);
-        muta = parseFloat(Math.abs(futuro).toFixed(3));
+        muta = parseFloat(Math.abs(futuro)).toFixed(3);
         return futuro.toFixed(3);
     }
   }
@@ -318,12 +318,12 @@ if(trigger){
 
   let fit = popula[0].fitness / 10000;
     document.getElementById("geracao").innerHTML = "Geração: " + geracao;
-    document.getElementById("maior_fit").innerHTML = "Maior Fitness: " + (fit)
+    document.getElementById("maior_fit").innerHTML = "Maior Fitness: " + (fit*100)
       .toFixed(2) + "%";
 
   let media_fit = (soma_fitness / quantidade_pop) / 100;
 document.getElementById("media_fit").innerHTML = "Media de Fitness: " + media_fit.toFixed(2) + "%"
-document.getElementById("tempo_geracao").innerHTML = 'Tempo de Geração: ' + elapsed + ' segundo(s)';
+document.getElementById("tempo_geracao").innerHTML = 'Tempo de Geração: ' + elapsed + ' seg';
 
 document.getElementById("muta_din").innerHTML = 'Mutação Dinâmica: ' + (muta * 100) + '%';
 
