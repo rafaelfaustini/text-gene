@@ -30,10 +30,10 @@ function taxa_dinamica(tax) {
     if ((pensamento[geracao_new - 3].mediafit - pensamento[geracao_new - 2].mediafit) > 0) {
 
       if(self.lista){
-      pulo = self.lista[geracao_new - 2].escolha;
-    } else {
+        pulo = self.lista[geracao_new - 2].escolha;
+      } else {
 
-    }
+      }
     }
   }
   if (Number.isInteger(geracao_new) && tamanho_pensamento < geracao_new) {
@@ -50,27 +50,27 @@ function taxa_dinamica(tax) {
     let escolha = int(random(0, 2));
     switch(escolha){
       case 0:
-        elemento_pensamento.acao = 0;
-        pensamento.push(elemento_pensamento);
-        futuro = random(tax - (tax * 2), tax - 0.001);
-         // Diminui a mutação
+      elemento_pensamento.acao = 0;
+      pensamento.push(elemento_pensamento);
+      futuro = random(tax - (tax * 2), tax - 0.001);
+      // Diminui a mutação
 
-        muta = parseFloat(Math.abs(futuro)).toFixed(3);
-        return futuro.toFixed(3);
+      muta = parseFloat(Math.abs(futuro)).toFixed(3);
+      return futuro.toFixed(3);
       case 1:
-        elemento_pensamento.acao = 1;
-        pensamento.push(elemento_pensamento);
-        futuro = random(tax + 0.001, tax + (tax * 2));
-        // Aumenta a mutação
-        muta = parseFloat(abs(futuro)).toFixed(3);
-        return futuro.toFixed(3);
-       case 2:
-        elemento_pensamento.acao = 2;
-        pensamento.push(elemento_pensamento);
-        futuro = tax;
-        // Mantém a mutação
-        muta = parseFloat(Math.abs(futuro)).toFixed(3);
-        return futuro.toFixed(3);
+      elemento_pensamento.acao = 1;
+      pensamento.push(elemento_pensamento);
+      futuro = random(tax + 0.001, tax + (tax * 2));
+      // Aumenta a mutação
+      muta = parseFloat(abs(futuro)).toFixed(3);
+      return futuro.toFixed(3);
+      case 2:
+      elemento_pensamento.acao = 2;
+      pensamento.push(elemento_pensamento);
+      futuro = tax;
+      // Mantém a mutação
+      muta = parseFloat(Math.abs(futuro)).toFixed(3);
+      return futuro.toFixed(3);
     }
   }
   soma += popula[0].fitness;
@@ -136,16 +136,16 @@ function dynamicSort(property) {
 
 
 function similaridade(s1, s2){
-var count = 0
-tamanho = s1.length;
-for(var i=0; i<tamanho; i++){
-  if(s1[i] == s2[i]){
-    count++;
+  var count = 0
+  tamanho = s1.length;
+  for(var i=0; i<tamanho; i++){
+    if(s1[i] == s2[i]){
+      count++;
+    }
   }
-}
 
-porcentagem = (100*count) / tamanho;
-return porcentagem/100;
+  porcentagem = (100*count) / tamanho;
+  return porcentagem/100;
 }
 
 
@@ -239,12 +239,12 @@ function reinicia(){
   criar_pop(population, nome);
 }
 function frase(obj){
-trigger = false;
-nome = obj.value;
-if(nome == ''){
-  nome="Hello World";
-}
-reinicia();
+  trigger = false;
+  nome = obj.value;
+  if(nome == ''){
+    nome="Hello World";
+  }
+  reinicia();
 }
 
 function pop_slider(obj){
@@ -264,42 +264,42 @@ String.prototype.limite = function(length) {
   return this.length > length ? this.substring(0, length) + " " : this;
 }
 function keyPressed() {
-    if(trigger){
-      noLoop();
-    } else{
-      loop();
-    }
+  if(trigger){
+    noLoop();
+  } else{
+    loop();
+  }
 
 }
 
-  var tempos_grafico= new Array();
+var tempos_grafico= new Array();
 
 function draw() {
 
-if(trigger){
-  noLoop();
-}
+  if(trigger){
+    noLoop();
+  }
   quantidade_pop = popula.length;
   let quantidade_dinamica = quantidade_pop;
 
   let str = "População:\n";
   switch (population) {
     case population >= 500 && population < 800:
-      quantidade_dinamica /= 2;
-      break;
+    quantidade_dinamica /= 2;
+    break;
     case population >= 800 && population < 1000:
-      quantidade_dinamica /= 3;
-      break;
+    quantidade_dinamica /= 3;
+    break;
     case population >= 1000 && population <= 2000:
-      quantidade_dinamica /= 5;
-      break;
+    quantidade_dinamica /= 5;
+    break;
   }
   for (let i = 0; i < quantidade_dinamica * 0.4; i++) {
 
     str += " " + (popula[i].gene)
-      .limite(6);
+    .limite(6);
     if (i % 20 == 0 && i != 0)
-      str += "\n";
+    str += "\n";
   }
   var tam = str.length;
 
@@ -310,19 +310,19 @@ if(trigger){
     trigger = false;
     procriar();
   }
-    document.getElementById("list_popula").innerHTML = str;
+  document.getElementById("list_popula").innerHTML = str;
   let atual = (popula[0].gene);
   document.getElementById("frase").innerHTML = atual
 
   let fit = popula[0].fitness / 10000;
-    document.getElementById("geracao").innerHTML = "Geração: " + geracao;
-    document.getElementById("maior_fit").innerHTML = "Maior Fitness: " + (fit*100)
-      .toFixed(2) + "%";
+  document.getElementById("geracao").innerHTML = "Geração: " + geracao;
+  document.getElementById("maior_fit").innerHTML = "Maior Fitness: " + (fit*100)
+  .toFixed(2) + "%";
 
   let media_fit = (soma_fitness / quantidade_pop) / 100;
-document.getElementById("media_fit").innerHTML = "Media de Fitness: " + media_fit.toFixed(2) + "%"
-document.getElementById("tempo_geracao").innerHTML = 'Tempo de Geração: ' + elapsed + ' seg';
+  document.getElementById("media_fit").innerHTML = "Media de Fitness: " + media_fit.toFixed(2) + "%"
+  document.getElementById("tempo_geracao").innerHTML = 'Tempo de Geração: ' + elapsed + ' seg';
 
-document.getElementById("muta_din").innerHTML = 'Mutação Dinâmica: ' + (muta * 100) + '%';
+  document.getElementById("muta_din").innerHTML = 'Mutação Dinâmica: ' + (muta * 100) + '%';
 
 }
