@@ -11,6 +11,8 @@
 <!-- Material Design Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.9/css/mdb.min.css" rel="stylesheet">
 
+<link href="css/style.css" rel="stylesheet">
+
 </head>
 
 <body class="info-color">
@@ -46,14 +48,32 @@
 <div class="row text-center">
         <h1 id="frase" class="text-center mx-auto mt-5 text-white display-1">Hello World </h1>
 </div>
-<p id="list_popula" class="text-white">População:</p>
+<div class="card border-white info-color mb-3">
+  <div class="card-header" id="headingOne">
+    <h2 class="mb-0">
+          <p  class="text-white m-2">População</p>
+      <button class="btn btn-danger btn-smbtn-danger " data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+      Ver mais
+    </button>
+    </h2>
+  </div>
+
+  <div id="collapseOne" class="collapse text-center" aria-labelledby="headingOne">
+    <p id="list_popula" class="text-white m-2 font-weight-light"></p>
+  </div>
+</div>
+</div>
+
 </div>
 
 
 
-<div class="row text-center mx-auto mt-2 mb-2"  style="position: relative; height:2vh; width:50vw">
+<div class="row text-center mx-auto mt-2 mb-2">
+<div class="col-md-6 mx-auto">
 <canvas id="myChart"></canvas>
 </div>
+</div>
+
 <script>
 var canvas = document.getElementById('myChart');
 var data = {
@@ -62,7 +82,7 @@ var data = {
         {
             label: "Maior Fitness",
             fill: true,
-            lineTension: 0.3,
+            lineTension: 0.2,
             backgroundColor: "rgba(253,152,78,1)",
             borderColor: "rgba(255,255,255,1)",
             borderCapStyle: 'round',
@@ -71,14 +91,14 @@ var data = {
             borderJoinStyle: 'miter',
             pointBorderColor: "rgba(163,255,15,1)",
             pointBackgroundColor: "#fff",
-            pointBorderWidth: 15,
+            pointBorderWidth: 10,
             pointHoverRadius: 10,
             pointHoverBackgroundColor: "rgba(110,179,0,1)",
             pointHoverBorderColor: "rgba(220,220,220,1)",
-            pointHoverBorderWidth: 2,
+            pointHoverBorderWidth: 1,
             pointStyle: "rectRot",
-            pointRadius: 3,
-            pointHitRadius: 10,
+            pointRadius: 0.4,
+            pointHitRadius: 5,
             data: [],
         }
     ]
@@ -97,7 +117,7 @@ function addData(value,geracao){
   var tamanhoAtual = myLineChart.data.datasets[0].data.length;
   var tamanhoDataset = myLineChart.data.datasets.length;
   let gera = geracao;
-  myLineChart.data.datasets[0].data[tamanhoAtual] = value;
+  myLineChart.data.datasets[0].data[tamanhoAtual] = (value*100).toFixed(2);
   if (geracao == undefined) gera=1;
   myLineChart.data.labels[tamanhoAtual] = gera;
   myLineChart.update();
