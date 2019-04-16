@@ -232,10 +232,16 @@ function tempo() {
     elapsed++;
   }
 }
+function tempo2() {
+  if (trigger == false) {
+    elapsed2++;
+  }
+}
 function reinicia(){
   popula.length = 0;
   population = document.getElementById("populacao").value;
   elapsed = 0;
+  clearChart();
   criar_pop(population, nome);
 }
 function frase(obj){
@@ -323,11 +329,10 @@ function draw() {
   document.getElementById("media_fit").innerHTML = "Media de Fitness: " + media_fit.toFixed(2) + "%"
 
   if(elapsed> 1000){
-      document.getElementById("tempo_geracao").innerHTML = 'Tempo de Geração: ' + elapsed/1000 + ' s';
+      document.getElementById("tempo_geracao").innerHTML = 'Tempo de Geração: ' + (millis()/1000).toFixed(1) + ' s';
   } else {
-      document.getElementById("tempo_geracao").innerHTML = 'Tempo de Geração: ' + elapsed + ' ms';
+      document.getElementById("tempo_geracao").innerHTML = 'Tempo de Geração: ' + millis().toFixed(1) + ' ms';
   }
-
 
 
   document.getElementById("muta_din").innerHTML = 'Mutação Dinâmica: ' + (muta * 100) + '%';

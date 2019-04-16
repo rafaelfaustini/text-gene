@@ -121,6 +121,12 @@
     myLineChart.update();
   }
 
+  function clearChart(){
+    myLineChart.data.labels.length = 0;
+    myLineChart.data.datasets[0].data.length = 0;
+    myLineChart.update();
+  }
+
   addData();
 </script>
 
