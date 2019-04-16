@@ -257,7 +257,7 @@ function setup() {
   population = 1000;
   criar_pop(1000, nome);
   fitness();
-  setInterval(tempo, 1000);
+  setInterval(tempo, 1);
   noCanvas();
 }
 String.prototype.limite = function(length) {
@@ -321,7 +321,14 @@ function draw() {
 
   let media_fit = (soma_fitness / quantidade_pop) / 100;
   document.getElementById("media_fit").innerHTML = "Media de Fitness: " + media_fit.toFixed(2) + "%"
-  document.getElementById("tempo_geracao").innerHTML = 'Tempo de Geração: ' + elapsed + ' seg';
+
+  if(elapsed> 1000){
+      document.getElementById("tempo_geracao").innerHTML = 'Tempo de Geração: ' + elapsed/1000 + ' s';
+  } else {
+      document.getElementById("tempo_geracao").innerHTML = 'Tempo de Geração: ' + elapsed + ' ms';
+  }
+
+
 
   document.getElementById("muta_din").innerHTML = 'Mutação Dinâmica: ' + (muta * 100) + '%';
 
