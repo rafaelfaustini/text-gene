@@ -22,8 +22,14 @@
         <input type="text" id="inputAGBn" class="form-control form-control-lg text-white" value="Hello World" oninput="frase(this);">
         <label for="inputAGBn" class="text-white" >Frase</label>
       </div>
+      <div class="row ml-1">
       <label id="pop_label" class="text-white" for="pop">População: 1000 elementos</label>
-      <input type="range" class="custom-range" id="populacao" min="100"  max="5000" value="1000" onchange="pop_slider(this)">
+      <div class="custom-control custom-checkbox ml-auto mr-1 text-white">
+        <input type="checkbox" class="custom-control-input" id="mutacaoDinamica" onchange="toggleDinamica(this)" checked>
+        <label class="custom-control-label" for="mutacaoDinamica">Mutação Dinâmica (experimental)</label>
+      </div>
+    </div>
+      <input type="range" class="custom-range" id="populacao" min="100"  max="30000" value="1000" onchange="pop_slider(this)">
 
 
       <!-- Grid row -->

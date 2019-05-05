@@ -8,24 +8,30 @@ let soma_pesos = 0;
 let soma_fitness = 0;
 let population;
 var nome;
-var mutacao_l = 1;
+var mutacao_l = 5;
 let soma = 0;
-let muta = 0.01;
+let muta = 0.05;
 let pai_index = 0;
 let mae_index = 0;
 let trigger = false;
-let taxa = 0.01;
+let dinamica = true;
 
 
 String.prototype.replaceAt = function(index, character) {
   return this.substr(0, index) + character + this.substr(index + character.length);
 };
 
+function toggleDinamica(obj){
+ dinamica = !dinamica;
+ if(!dinamica){
+   muta = 0.1
+ }
+}
+
 function taxa_dinamica(tax) {
   let pulo = null;
   let tamanho_pensamento = pensamento.length;
   let geracao_new = geracao / 10;
-
   if (tamanho_pensamento > 1 && tamanho_pensamento < (geracao_new) && Number.isInteger(geracao_new)) {
     if ((pensamento[geracao_new - 3].mediafit - pensamento[geracao_new - 2].mediafit) > 0) {
 
@@ -36,7 +42,8 @@ function taxa_dinamica(tax) {
       }
     }
   }
-  if (Number.isInteger(geracao_new) && tamanho_pensamento < geracao_new) {
+  tax = abs(tax);
+  if (Number.isInteger(geracao_new) && tamanho_pensamento < geracao_new && !isNaN(tax) && tax !== undefined) {
     let lembranca = function(acao, mediafit) { // Colocar o objeto pessoa no vetor
       this.acao = acao;
       this.mediafit = mediafit;
@@ -56,6 +63,7 @@ function taxa_dinamica(tax) {
       // Diminui a mutação
 
       muta = parseFloat(Math.abs(futuro)).toFixed(3);
+
       return futuro.toFixed(3);
       case 1:
       elemento_pensamento.acao = 1;
@@ -63,6 +71,7 @@ function taxa_dinamica(tax) {
       futuro = random(tax + 0.001, tax + (tax * 2));
       // Aumenta a mutação
       muta = parseFloat(abs(futuro)).toFixed(3);
+
       return futuro.toFixed(3);
       case 2:
       elemento_pensamento.acao = 2;
@@ -70,6 +79,7 @@ function taxa_dinamica(tax) {
       futuro = tax;
       // Mantém a mutação
       muta = parseFloat(Math.abs(futuro)).toFixed(3);
+
       return futuro.toFixed(3);
     }
   }
@@ -195,6 +205,9 @@ function selecionar(soma) {
 
 }
 
+function isDinamica(){
+return dinamica;
+}
 
 function procriar() {
   let temp = new Array;
@@ -202,7 +215,12 @@ function procriar() {
   tamanho_nome = nome.length;
   for (v = 0; v < quantidade_pop; v++) {
     selecionar(soma_pesos);
-    let tmp = mutacao(popula[pai_index].gene.substr(0, (tamanho_nome / 2)) + popula[mae_index].gene.substr(tamanho_nome / 2, tamanho_nome), taxa_dinamica(mutacao_l / 100));
+    var valor=mutacao_l;
+    if(isDinamica()){
+      valor = taxa_dinamica(muta)
+    }
+
+    let tmp = mutacao(popula[pai_index].gene.substr(0, (tamanho_nome / 2)) + popula[mae_index].gene.substr(tamanho_nome / 2, tamanho_nome), valor);
     append(temp, tmp)
   }
   for (i = 0; i < quantidade_pop; i++) {
@@ -241,6 +259,7 @@ function frase(obj){
 }
 
 function pop_slider(obj){
+  population = obj.value;
   document.getElementById("pop_label").innerHTML = "População: "+obj.value+" elementos";
   reinicia();
 }
@@ -296,10 +315,10 @@ function showTempoDecorrido(){
 function showFrase(frase){
     document.getElementById("frase").innerHTML = frase;
 }
-function showMutacaoDin(taxa){
-    taxa *= 100;
-    taxa = formataNumero(taxa);
-    document.getElementById("muta_din").innerHTML = 'Mutação Dinâmica: ' + taxa + '%';
+function showMutacaoDin(valor){
+    valor *= 100;
+    valor = formataNumero(valor);
+    document.getElementById("muta_din").innerHTML = 'Mutação Dinâmica: ' + valor + '%';
 }
 function showListaPop(text){
     document.getElementById("list_popula").innerHTML = text;
