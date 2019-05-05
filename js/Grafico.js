@@ -107,7 +107,9 @@ class Grafico{
   clear(){
   var chart = this.getLineChart();
     chart.data.labels.length = 0;
-    chart.data.datasets[0].data.length = 0;
+    for(let i = 0; i < chart.data.datasets.length; i++){
+      chart.data.datasets[i].data.length=0; // Percorre o vetor de dados e limpa
+    }
     this.setLineChart(chart)
     this.getLineChart().update();
   }
