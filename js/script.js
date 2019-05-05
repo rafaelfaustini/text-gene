@@ -34,7 +34,7 @@ function toggleDinamica(obj){
  dinamica = !dinamica;
  $("#formMutacao").hide();
  if(!dinamica){
-   muta = 0.01
+   muta = 0.1
    $("#formMutacao").show();
  }
  reinicia();
@@ -124,7 +124,8 @@ function criar_pop(n, nome) {
     this.gene = gene;
     this.fitness = fitness;
   };
-  addData(0,geracao)
+  grafico.add(0,0,geracao)
+  grafico.add(1,muta*100,geracao)
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < len; j++) {
       if (word === undefined) {
@@ -246,7 +247,8 @@ function procriar() {
  let maior = popula[0];
   if(geracao< 60 || geracao%10==0 || maior.fitness == 1){
    let valor = formataFit(popula[0].fitness)
-  addData( valor, geracao);
+   grafico.add(0, valor, geracao);
+   grafico.add(1, muta*100,geracao)
 
 }
 
@@ -254,7 +256,7 @@ function procriar() {
 }
 function reinicia(){
   noLoop();
-  clearChart();
+  grafico.clear();
   coeficienteTempo = millis();
   criar_pop(population, nome);
   fitness();
