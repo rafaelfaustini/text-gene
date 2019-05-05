@@ -15,17 +15,29 @@ let pai_index = 0;
 let mae_index = 0;
 let trigger = false;
 let dinamica = true;
-
+$("#formMutacao").hide();
 
 String.prototype.replaceAt = function(index, character) {
   return this.substr(0, index) + character + this.substr(index + character.length);
 };
 
+function inputMutacao(obj){
+  valor = obj.value;
+  if(isNaN(valor)){
+    return;
+  }
+  muta = valor/100;
+  reinicia();
+}
+
 function toggleDinamica(obj){
  dinamica = !dinamica;
+ $("#formMutacao").hide();
  if(!dinamica){
-   muta = 0.1
+   muta = 0.01
+   $("#formMutacao").show();
  }
+ reinicia();
 }
 
 function taxa_dinamica(tax) {
@@ -315,10 +327,14 @@ function showTempoDecorrido(){
 function showFrase(frase){
     document.getElementById("frase").innerHTML = frase;
 }
-function showMutacaoDin(valor){
+function showMutacao(valor, dinAtivada){
     valor *= 100;
     valor = formataNumero(valor);
-    document.getElementById("muta_din").innerHTML = 'Mutação Dinâmica: ' + valor + '%';
+    var str = 'Mutação: ';
+    if(dinAtivada){
+      str= 'Mutação Dinâmica: ';
+    }
+    document.getElementById("muta_din").innerHTML = str + valor + '%';
 }
 function showListaPop(text){
     document.getElementById("list_popula").innerHTML = text;
@@ -372,6 +388,6 @@ function draw() {
   showMaiorFit(maiorElemento.fitness)
   showMediaFit(soma_fitness, quantidade_pop)
   showTempoDecorrido()
-  showMutacaoDin(muta)
+  showMutacao(muta, dinamica)
 
 }

@@ -18,15 +18,25 @@
 <body class="info-color">
   <div class="container">
     <div class="mt-5">
+      <div class="form-row">
+        <div class="col">
       <div class="md-form form-lg">
         <input type="text" id="inputAGBn" class="form-control form-control-lg text-white" value="Hello World" oninput="frase(this);">
         <label for="inputAGBn" class="text-white" >Frase</label>
       </div>
+    </div>
+    <div class="col" id="formMutacao">
+      <div class="md-form form-lg">
+        <input type="number" id="inputAGBn" class="form-control form-control-lg text-white" value="1" oninput="inputMutacao(this)">
+        <label for="inputAGBn" class="text-white" >Taxa Mutação (%)</label>
+      </div>
+    </div>
+    </div>
       <div class="row ml-1">
       <label id="pop_label" class="text-white" for="pop">População: 1000 elementos</label>
       <div class="custom-control custom-checkbox ml-auto mr-1 text-white">
         <input type="checkbox" class="custom-control-input" id="mutacaoDinamica" onchange="toggleDinamica(this)" checked>
-        <label class="custom-control-label" for="mutacaoDinamica">Mutação Dinâmica (experimental)</label>
+        <label class="custom-control-label" for="mutacaoDinamica">Mutação Dinâmica</label>
       </div>
     </div>
       <input type="range" class="custom-range" id="populacao" min="100"  max="30000" value="1000" onchange="pop_slider(this)">
