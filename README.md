@@ -1,5 +1,6 @@
 # Text Gene
-![text gene picture](https://i.imgur.com/yyQnv2t.png "Text Gene")
+
+![text gene picture](https://i.imgur.com/uY3kSGQ.png "Text Gene")
 
 An WEB application that uses genetic programming principles to guess the text you wrote.
 
@@ -9,7 +10,7 @@ The dinamic mutation is a system where the mutation rate of the elements changes
 ## Dependencies
 * P5.js
 * Charts.js
-* Bootstrap 5
+* Bootstrap Md
 
 ## Contribution
 Feel free to contribute to improve the code !
