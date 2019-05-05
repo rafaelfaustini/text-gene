@@ -34,12 +34,36 @@ class Grafico{
 
     this.data = {
       labels: [],
-      datasets: vetorDatasets
+      datasets: vetorDatasets,
     };
 
     this.option = {
       showLines: true,
-      responsive: true
+      responsive: true,
+      legend: {
+            labels: {
+                fontColor: '#fff'
+            }
+    },
+    title: {
+     display: true,
+     fontColor: '#fff',
+     text: 'Relação entre a variação de mutação e fitness ao decorrer das gerações'
+ },
+ scales: {
+     yAxes: [{
+         ticks: {
+             beginAtZero:true,
+             fontColor: '#fff'
+         },
+     }],
+   xAxes: [{
+         ticks: {
+             fontColor: '#fff'
+         },
+     }]
+
+}
     };
 
   }
@@ -57,6 +81,7 @@ class Grafico{
       data:this.getData(),
       options:this.getOptions()
     });
+
   }
 
   getLineChart(){
