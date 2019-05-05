@@ -1,4 +1,4 @@
-let elapsed = 0;﻿
+let coeficienteTempo=0; // Coeficiente para ajustar o tempo em troca de população, guarda o instante em ms
 let popula = new Array();
 let pensamento = new Array();
 let geracao = 0;
@@ -93,20 +93,16 @@ function mutacao(dna, taxamt) {
 
 
 function criar_pop(n, nome) {
-
-
+  popula.length = 0;
   geracao = 0;
   let len = nome.length;
-  geracao += 1;
   quantidade_pop = n;
   let word;
   let pessoa = function(gene, fitness) { // Colocar o objeto pessoa no vetor
     this.gene = gene;
     this.fitness = fitness;
   };
-
-
-
+  addData(0,geracao)
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < len; j++) {
       if (word === undefined) {
@@ -119,7 +115,6 @@ function criar_pop(n, nome) {
     append(popula, new pessoa(word, 0))
     word = undefined;
   }
-
 }
 
 function dynamicSort(property) {
@@ -157,11 +152,10 @@ function fitness() {
   for (i = 0; i < quantidade_pop; i++) {
     count += similaridade(popula[i].gene, nome);
     count = (count * 100);
-    popula[i].fitness = Math.pow(count,2);
+    popula[i].fitness = Math.pow(count,2)/10000;
     soma_fitness += popula[i].fitness;
     soma_pesos += count;
     count = 0;
-
   }
   popula.sort(dynamicSort("-fitness")); // Quick Sort -> n log n
 }
@@ -219,30 +213,23 @@ function procriar() {
   geracao += 1;
   fitness();
 
-  if(geracao< 60 || geracao%10==0)
-  addData( (popula[0].fitness/ 10000).toFixed(2), geracao);
-
+ let maior = popula[0];
+  if(geracao< 60 || geracao%10==0 || maior.fitness == 1){
+   let valor = formataFit(popula[0].fitness)
+  addData( valor, geracao);
 
 }
 
 
-
-function tempo() {
-  if (trigger == false) {
-    elapsed++;
-  }
-}
-function tempo2() {
-  if (trigger == false) {
-    elapsed2++;
-  }
 }
 function reinicia(){
-  popula.length = 0;
-  population = document.getElementById("populacao").value;
-  elapsed = 0;
+  noLoop();
   clearChart();
+  coeficienteTempo = millis();
   criar_pop(population, nome);
+  fitness();
+  trigger = false;
+  loop();
 }
 function frase(obj){
   trigger = false;
@@ -263,7 +250,6 @@ function setup() {
   population = 1000;
   criar_pop(1000, nome);
   fitness();
-  setInterval(tempo, 1);
   noCanvas();
 }
 String.prototype.limite = function(length) {
@@ -278,6 +264,56 @@ function keyPressed() {
 
 }
 
+function formataFit(numero){
+  numero *= 100;
+  return formataNumero(numero);
+}
+
+function formataNumero(num){
+  return (Math.round( num * 100 ) / 100).toFixed(2);
+}
+
+function showGeracao(numero){
+  document.getElementById("geracao").innerHTML = "Geração: " + numero;
+}
+function showMaiorFit(numero){
+numero = formataFit(numero)
+  document.getElementById("maior_fit").innerHTML = "Maior Fitness: " + numero + "%";
+}
+function showMediaFit(soma, tamanhoPop){
+    let media_fit = (soma / tamanhoPop) / 100;
+    media_fit = formataNumero(media_fit);
+    document.getElementById("media_fit").innerHTML = "Media de Fitness: " + media_fit + "%"
+}
+function showTempoDecorrido(){
+  tempo = millis() - coeficienteTempo;
+  if(tempo> 1000){
+      document.getElementById("tempo_geracao").innerHTML = 'Tempo de Geração: ' + (tempo/1000).toFixed(1) + ' s';
+  } else {
+      document.getElementById("tempo_geracao").innerHTML = 'Tempo de Geração: ' + tempo.toFixed(1) + ' ms';
+  }
+}
+function showFrase(frase){
+    document.getElementById("frase").innerHTML = frase;
+}
+function showMutacaoDin(taxa){
+    taxa *= 100;
+    taxa = formataNumero(taxa);
+    document.getElementById("muta_din").innerHTML = 'Mutação Dinâmica: ' + taxa + '%';
+}
+function showListaPop(text){
+    document.getElementById("list_popula").innerHTML = text;
+}
+
+function checarFim(e){
+  // Condição de término atingida ?
+  if (e.gene == nome || e.fitness == 10000) {
+    trigger = true; // Fim
+  } else {
+    trigger = false; // Cria nova população
+    procriar();
+  }
+}
 var tempos_grafico= new Array();
 
 function draw() {
@@ -307,34 +343,16 @@ function draw() {
     if (i % 20 == 0 && i != 0)
     str += "\n";
   }
-  var tam = str.length;
 
+  var maiorElemento = popula[0];
 
-  if (popula[0].gene == nome || popula[0].fitness == 10000) {
-    trigger = true;
-  } else {
-    trigger = false;
-    procriar();
-  }
-  document.getElementById("list_popula").innerHTML = str;
-  let atual = (popula[0].gene);
-  document.getElementById("frase").innerHTML = atual
-
-  let fit = popula[0].fitness / 10000;
-  document.getElementById("geracao").innerHTML = "Geração: " + geracao;
-  document.getElementById("maior_fit").innerHTML = "Maior Fitness: " + (fit*100)
-  .toFixed(2) + "%";
-
-  let media_fit = (soma_fitness / quantidade_pop) / 100;
-  document.getElementById("media_fit").innerHTML = "Media de Fitness: " + media_fit.toFixed(2) + "%"
-
-  if(elapsed> 1000){
-      document.getElementById("tempo_geracao").innerHTML = 'Tempo de Geração: ' + (millis()/1000).toFixed(1) + ' s';
-  } else {
-      document.getElementById("tempo_geracao").innerHTML = 'Tempo de Geração: ' + millis().toFixed(1) + ' ms';
-  }
-
-
-  document.getElementById("muta_din").innerHTML = 'Mutação Dinâmica: ' + (muta * 100) + '%';
+  checarFim(maiorElemento)
+  showListaPop(str)
+  showFrase(maiorElemento.gene)
+  showGeracao(geracao)
+  showMaiorFit(maiorElemento.fitness)
+  showMediaFit(soma_fitness, quantidade_pop)
+  showTempoDecorrido()
+  showMutacaoDin(muta)
 
 }
