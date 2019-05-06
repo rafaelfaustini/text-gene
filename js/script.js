@@ -334,10 +334,11 @@ function showFrase(frase){
 function showMutacao(valor, dinAtivada){
     valor *= 100;
     valor = formataNumero(valor);
-    var str = 'Mutação: ';
+    var str = language.mutation;
     if(dinAtivada){
-      str= 'Mutação Dinâmica: ';
+      str= language.dinamic;
     }
+    str+=" "
     document.getElementById("muta_din").innerHTML = str + valor + '%';
 }
 function showListaPop(text){
