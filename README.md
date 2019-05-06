@@ -7,6 +7,8 @@ An WEB application that uses genetic programming principles to guess the text yo
 # Dinamic Mutation Rate
 The dinamic mutation is a system where the mutation rate of the elements changes based on previous results
 
+# Multilingual System
+The multilingual system uses json and makes easy the job of translating the page, feel free to contribute and add new languages
 ## Dependencies
 * P5.js
 * Charts.js
