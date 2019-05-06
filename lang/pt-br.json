@@ -1,7 +1,7 @@
 {
     "textInput": "Frase",
     "population": "População:",
-    "elements": "elements",
+    "elements": "elementos",
     "generation": "Geração:",
     "elapsed": "Tempo de Geração:",
     "best": "Maior Fitness:",

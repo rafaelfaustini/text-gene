@@ -353,6 +353,7 @@ function checarFim(e){
     procriar();
   }
 }
+
 var tempos_grafico= new Array();
 
 function draw() {
@@ -393,5 +394,4 @@ function draw() {
   showMediaFit(soma_fitness, quantidade_pop)
   showTempoDecorrido()
   showMutacao(muta, dinamica)
-
 }

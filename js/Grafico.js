@@ -49,6 +49,7 @@ class Grafico{
      display: true,
      fontColor: '#fff',
      text: language.title
+
  },
  scales: {
      yAxes: [{
