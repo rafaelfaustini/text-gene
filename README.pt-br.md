@@ -11,11 +11,13 @@ A taxa de mutação dinâmica é um sistema onde a taxa de mutação dos element
 O sistema multilingual usa JSON e tona fácil o trabalho de traduzir a página, sinta-se livre para contribuir e adicionar novos idiomas.
 
 ## Dependências
+
 * [p5.js](https://p5js.org)
 * [chart.js](https://www.chartjs.org)
 * [Material Design Bootstrap](https://mdbootstrap.com)
 * [Font Awesome](https://fontawesome.com)
 * [CanvasToBlob.js](http://purl.eligrey.com/github/FileSaver.js/)
+* [Overpass Font](https://overpassfont.org)
 
 ## Contribuição
 Sinta-se livre para contribuir com ideias ou até mesmo com código !

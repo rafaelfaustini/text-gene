@@ -20,6 +20,7 @@ You are now able to export the chart as png
 * [Material Design Bootstrap](https://mdbootstrap.com)
 * [Font Awesome](https://fontawesome.com)
 * [CanvasToBlob.js](http://purl.eligrey.com/github/FileSaver.js/)
+* [Overpass Font](https://overpassfont.org)
 
 
 ## Contribution
