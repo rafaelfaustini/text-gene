@@ -9,6 +9,9 @@ The dinamic mutation is a system where the mutation rate of the elements changes
 
 # Multilingual System
 The multilingual system uses json and makes easy the job of translating the page, feel free to contribute and add new languages
+
+# Saving Chart
+You are now able to export the chart as png
 ## Dependencies
 * P5.js
 * Charts.js
