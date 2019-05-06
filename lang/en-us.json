@@ -1,0 +1,15 @@
+{
+    "textInput": "Text",
+    "population": "Population:",
+    "elements": "elements",
+    "generation": "Generation:",
+    "elapsed": "Elapsed Time:",
+    "best": "Best Fitness:",
+    "average": "Average Fitness:",
+    "dinamic": "Dinamic Mutation:",
+    "default": "Hello World",
+    "title": "Relation between the mutation variation and fitness during generations",
+    "rate": "Mutation rate (%)",
+    "showbtn": "Show more",
+    "chart": ["Best Fitness", "Mutation rate"]
+}

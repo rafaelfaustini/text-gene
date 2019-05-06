@@ -48,7 +48,7 @@ class Grafico{
     title: {
      display: true,
      fontColor: '#fff',
-     text: 'Relação entre a variação de mutação e fitness ao decorrer das gerações'
+     text: language.title
  },
  scales: {
      yAxes: [{

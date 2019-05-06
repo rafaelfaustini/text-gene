@@ -258,6 +258,8 @@ function reinicia(){
   noLoop();
   grafico.clear();
   coeficienteTempo = millis();
+  if(nome == "Hello World")
+  nome= language.default;
   criar_pop(population, nome);
   fitness();
   trigger = false;
@@ -267,19 +269,19 @@ function frase(obj){
   trigger = false;
   nome = obj.value;
   if(nome == ''){
-    nome="Hello World";
+    nome=language.default;
   }
   reinicia();
 }
 
 function pop_slider(obj){
   population = obj.value;
-  document.getElementById("pop_label").innerHTML = "População: "+obj.value+" elementos";
+  document.getElementById("pop_label").innerHTML = language.population+" "+obj.value+" "+language.elements;
   reinicia();
 }
 
 function setup() {
-  nome = "Hello World";
+  nome = language.default;
   population = 1000;
   criar_pop(1000, nome);
   fitness();
@@ -307,23 +309,23 @@ function formataNumero(num){
 }
 
 function showGeracao(numero){
-  document.getElementById("geracao").innerHTML = "Geração: " + numero;
+  document.getElementById("geracao").innerHTML = language.generation+" " + numero;
 }
 function showMaiorFit(numero){
 numero = formataFit(numero)
-  document.getElementById("maior_fit").innerHTML = "Maior Fitness: " + numero + "%";
+  document.getElementById("maior_fit").innerHTML = language.best +" " +" " +" " +" " +" " + numero + "%";
 }
 function showMediaFit(soma, tamanhoPop){
     let media_fit = (soma / tamanhoPop) / 100;
     media_fit = formataNumero(media_fit);
-    document.getElementById("media_fit").innerHTML = "Media de Fitness: " + media_fit + "%"
+    document.getElementById("media_fit").innerHTML = language.average +" " + media_fit + "%"
 }
 function showTempoDecorrido(){
   tempo = millis() - coeficienteTempo;
   if(tempo> 1000){
-      document.getElementById("tempo_geracao").innerHTML = 'Tempo de Geração: ' + (tempo/1000).toFixed(1) + ' s';
+      document.getElementById("tempo_geracao").innerHTML = language.elapsed +" " + (tempo/1000).toFixed(1) + ' s';
   } else {
-      document.getElementById("tempo_geracao").innerHTML = 'Tempo de Geração: ' + tempo.toFixed(1) + ' ms';
+      document.getElementById("tempo_geracao").innerHTML = language.elapsed +" " + tempo.toFixed(1) + ' ms';
   }
 }
 function showFrase(frase){

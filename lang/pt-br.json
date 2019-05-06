@@ -1,0 +1,15 @@
+{
+    "textInput": "Frase",
+    "population": "População:",
+    "elements": "elements",
+    "generation": "Geração:",
+    "elapsed": "Tempo de Geração:",
+    "best": "Maior Fitness:",
+    "average": "Média de Fitness:",
+    "dinamic": "Mutação Dinâmica:",
+    "default": "Ola Mundo",
+    "title": "Relação entre a variação de mutação e fitness ao decorrer das gerações",
+    "rate": "Taxa de mutação (%)",
+    "showbtn": "Veja mais",
+    "chart": ["Maior Fitness", "Taxa Mutação"]
+}
