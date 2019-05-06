@@ -14,9 +14,13 @@ The multilingual system uses json and makes easy the job of translating the page
 You are now able to export the chart as png
 
 ## Dependencies
-* P5.js
-* Charts.js
-* Bootstrap Md
+
+* [p5.js](https://p5js.org)
+* [chart.js](https://www.chartjs.org)
+* [Material Design Bootstrap](https://mdbootstrap.com)
+* [Font Awesome](https://fontawesome.com)
+* [CanvasToBlob.js](http://purl.eligrey.com/github/FileSaver.js/)
+
 
 ## Contribution
 Feel free to contribute to improve the code !
