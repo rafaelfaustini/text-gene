@@ -5,7 +5,7 @@
 Uma aplicação WEB que usa os princípios da programação genética para descobrir o texto que você escreveu
 
 # Taxa de Mutação Dinâmica
-The dinamic mutation is a system where the mutation rate of the elements changes based on previous results
+A taxa de mutação dinâmica é um sistema onde a taxa de mutação dos elementos se baseia em resultados anteriores.
 
 # Sistema Multilingual
 O sistema multilingual usa JSON e tona fácil o trabalho de traduzir a página, sinta-se livre para contribuir e adicionar novos idiomas.
