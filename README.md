@@ -1,6 +1,6 @@
 # Text Gene
 
-![text gene picture](https://i.imgur.com/uY3kSGQ.png "Text Gene")
+![text gene picture](https://i.imgur.com/6AbL8KR.png "Text Gene")
 
 An WEB application that uses genetic programming principles to guess the text you wrote.
 
