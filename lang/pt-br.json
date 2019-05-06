@@ -9,6 +9,7 @@
     "dinamic": "Mutação Dinâmica",
     "mutation": "Mutação:",
     "default": "Ola Mundo",
+    "savechart": "Salvar Gráfico",
     "title": "Relação entre a variação de mutação e fitness ao decorrer das gerações",
     "rate": "Taxa de mutação (%)",
     "showbtn": "Veja mais",

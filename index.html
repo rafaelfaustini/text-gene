@@ -126,6 +126,7 @@ function translateText(){
    $('#mutacaoDinamicaCheck').text(language.dinamic);
    $('#pop-lbl').text(language.population+" "+$('#populacao').val()+" "+language.elements);
    $('#pop').text(language.population);
+   $('#savechart').text(language.savechart);
 
 
 }
@@ -133,6 +134,7 @@ function setLanguage(lang) {
 localStorage.setItem('language', lang);
 getLanguage();
 translateText();
+grafico.clear();
 grafico = new Grafico(language.chart);
 canvas = document.getElementById('myChart');
 grafico.showLineChart(canvas);

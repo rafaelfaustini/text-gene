@@ -9,6 +9,7 @@
     "dinamic": "Dinamic Mutation",
     "mutation": "Mutação:",
     "default": "Hello World",
+    "savechart": "Save Chart",
     "title": "Relation between the mutation variation and fitness during generations",
     "rate": "Mutation rate (%)",
     "showbtn": "Show more",
