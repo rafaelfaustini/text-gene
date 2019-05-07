@@ -355,17 +355,11 @@ function checarFim(e){
   }
 }
 
-var tempos_grafico= new Array();
-
-function draw() {
-
-  if(trigger){
-    noLoop();
-  }
+function generatePopStr(){
   quantidade_pop = popula.length;
   let quantidade_dinamica = quantidade_pop;
 
-  let str = "População:\n";
+  let str = language.population+" <br>";
   switch (population) {
     case population >= 500 && population < 800:
     quantidade_dinamica /= 2;
@@ -377,18 +371,26 @@ function draw() {
     quantidade_dinamica /= 5;
     break;
   }
+
   for (let i = 0; i < quantidade_dinamica * 0.4; i++) {
 
-    str += " " + (popula[i].gene)
-    .limite(6);
+    str += " " + (popula[i].gene).limite(6);
     if (i % 20 == 0 && i != 0)
     str += "\n";
   }
+       showListaPop(str)
+}
 
-  var maiorElemento = popula[0];
+function isOver(){
+  if(trigger){
+    noLoop();
+  }
+}
 
+function draw() {
+  isOver();
+  var maiorElemento = popula[0]
   checarFim(maiorElemento)
-  showListaPop(str)
   showFrase(maiorElemento.gene)
   showGeracao(geracao)
   showMaiorFit(maiorElemento.fitness)

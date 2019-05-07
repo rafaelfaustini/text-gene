@@ -70,7 +70,7 @@
         <div class="card-header" id="headingOne">
           <h2 class="mb-0">
             <p  class="text-white m-2" id="pop-lbl">População</p>
-            <button class="btn btn-danger btn-smbtn-danger " id="showbtn" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+            <button class="btn btn-danger btn-smbtn-danger " id="showbtn" onclick="generatePopStr()" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
               Ver mais
             </button>
             <button class="btn btn-danger btn-success" id="savechart" data-toggle="collapse" >
@@ -134,7 +134,8 @@ function setLanguage(lang) {
 localStorage.setItem('language', lang);
 getLanguage();
 translateText();
-grafico.clear();
+if(typeof grafico !== 'undefined')
+  grafico.clear();
 grafico = new Grafico(language.chart);
 canvas = document.getElementById('myChart');
 grafico.showLineChart(canvas);
