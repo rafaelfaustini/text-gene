@@ -4,65 +4,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- Bootstrap core CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Material Design Bootstrap -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.9/css/mdb.min.css" rel="stylesheet">
-
   <link href="css/style.css" rel="stylesheet">
-
 </head>
-
 <body class="info-color">
   <div class="container">
     <div class="mt-5">
       <div class="text-center">
-      <a href="#" onclick="setLanguage('en-us')" class="text-warning mx-1">English</a>
-      <a href="#" onclick="setLanguage('pt-br')" class="text-warning mx-1">Português</a>
-    </div>
+        <a href="#" onclick="setLanguage('en-us')" class="text-warning mx-1">English</a>
+        <a href="#" onclick="setLanguage('pt-br')" class="text-warning mx-1">Português</a>
+      </div>
       <div class="form-row">
         <div class="col">
-      <div class="md-form form-lg">
-        <input type="text" id="inputAGBn" class="form-control form-control-lg text-white" value="Hello World" oninput="frase(this);">
-        <label for="inputAGBn" id="textInput" class="text-white" >Frase</label>
+          <div class="md-form form-lg">
+            <input type="text" id="inputAGBn" class="form-control form-control-lg text-white" value="Hello World" oninput="frase(this);">
+            <label for="inputAGBn" id="textInput" class="text-white" >Frase</label>
+          </div>
+        </div>
+        <div class="col" id="formMutacao">
+          <div class="md-form form-lg">
+            <input type="number" id="inputAGBn" class="form-control form-control-lg text-white" value="10" oninput="inputMutacao(this)">
+            <label for="inputAGBn" class="text-white" id="rate">Taxa Mutação (%)</label>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="col" id="formMutacao">
-      <div class="md-form form-lg">
-        <input type="number" id="inputAGBn" class="form-control form-control-lg text-white" value="10" oninput="inputMutacao(this)">
-        <label for="inputAGBn" class="text-white" id="rate">Taxa Mutação (%)</label>
-      </div>
-    </div>
-    </div>
       <div class="row ml-1">
-      <label id="pop_label" class="text-white" for="pop">População: 1000 elementos</label>
-      <div class="custom-control custom-checkbox ml-auto mr-1 text-white">
-        <input type="checkbox" class="custom-control-input" id="mutacaoDinamica" onchange="toggleDinamica(this)" checked>
-        <label class="custom-control-label" for="mutacaoDinamica" id="mutacaoDinamicaCheck">Mutação Dinâmica</label>
+        <label id="pop_label" class="text-white" for="pop">População: 1000 elementos</label>
+        <div class="custom-control custom-checkbox ml-auto mr-1 text-white">
+          <input type="checkbox" class="custom-control-input" id="mutacaoDinamica" onchange="toggleDinamica(this)" checked>
+          <label class="custom-control-label" for="mutacaoDinamica" id="mutacaoDinamicaCheck">Mutação Dinâmica</label>
+        </div>
       </div>
-    </div>
       <input type="range" class="custom-range" id="populacao" min="100"  max="30000" value="1000" onchange="pop_slider(this)">
-
-
-      <!-- Grid row -->
-
-      <!-- Grid row -->
       <div class="row text-white text-center mt-2">
-        <!-- Default input -->
         <h2 id="geracao" class="col-sm-2 col-form-label text-center">Geração: </h2>
         <h2 id="tempo_geracao" class="col-sm-2 col-form-label text-center">Tempo Geração: </h2>
         <label id="maior_fit" class="col-sm-2 col-form-label text-center">Maior Fitness: </label>
         <label id="media_fit" class="col-sm-3 col-form-label text-center">Média Fitness: </label>
         <label id="muta_din" class="col-sm-2 col-form-label text-center">Mutação Dinâmica: </label>
-
       </div>
       <div class="form-group row text-white ">
-        <!-- Default input -->
       </div>
-
-
       <div class="row text-center">
         <h1 id="frase" class="text-center mx-auto mt-5 text-white display-1">Hello World </h1>
       </div>
@@ -78,79 +62,63 @@
             </button>
           </h2>
         </div>
-
         <div id="collapseOne" class="collapse text-center" aria-labelledby="headingOne">
           <p id="list_popula" class="text-white m-2 font-weight-light"></p>
         </div>
       </div>
     </div>
-
   </div>
-
-
-
   <div class="row text-center mx-auto mt-2 mb-2">
     <div class="col-md-6 mx-auto">
       <canvas id="myChart"></canvas>
     </div>
   </div>
-
-
 </div>
-
 <script src="js/Grafico.js"></script>
-
-<!-- JQuery -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- Bootstrap tooltips -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/javascript-canvas-to-blob/3.14.0/js/canvas-to-blob.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
-
-
 <script>
 var language;
 var reiniciar = false;
 function getLanguage() {
-(localStorage.getItem('language') == null) ? setLanguage('en-us') : false;
-$.ajax({
-url:  '/lang/' +  localStorage.getItem('language') + '.json',
-dataType: 'json', async: false, dataType: 'json',
-success: function (lang) { language = lang } });
+  (localStorage.getItem('language') == null) ? setLanguage('en-us') : false;
+  $.ajax({
+    url:  '/lang/' +  localStorage.getItem('language') + '.json',
+    dataType: 'json', async: false, dataType: 'json',
+    success: function (lang) { language = lang } });
+  }
+  function translateText(){
+    $('#textInput').text(language.textInput);
+    $('#showbtn').text(language.showbtn);
+    $('#rate').text(language.rate);
+    $('#inputAGBn').prop('defaultValue', language.default);
+    $('#mutacaoDinamicaCheck').text(language.dinamic);
+    $('#pop-lbl').text(language.population+" "+$('#populacao').val()+" "+language.elements);
+    $('#pop').text(language.population);
+    $('#savechart').text(language.savechart);
+  }
+  function setLanguage(lang) {
+    localStorage.setItem('language', lang);
+    getLanguage();
+    translateText();
+    if(typeof grafico !== 'undefined')
+    grafico.clear();
+    grafico = new Grafico(language.chart);
+    canvas = document.getElementById('myChart');
+    grafico.showLineChart(canvas);
+  }
+  setLanguage('en-us');
 
-}
-function translateText(){
-   $('#textInput').text(language.textInput);
-   $('#showbtn').text(language.showbtn);
-   $('#rate').text(language.rate);
-   $('#inputAGBn').prop('defaultValue', language.default);
-   $('#mutacaoDinamicaCheck').text(language.dinamic);
-   $('#pop-lbl').text(language.population+" "+$('#populacao').val()+" "+language.elements);
-   $('#pop').text(language.population);
-   $('#savechart').text(language.savechart);
+  $(document).ready(function(){
+    translateText();
+  });
 
-
-}
-function setLanguage(lang) {
-localStorage.setItem('language', lang);
-getLanguage();
-translateText();
-if(typeof grafico !== 'undefined')
-  grafico.clear();
-grafico = new Grafico(language.chart);
-canvas = document.getElementById('myChart');
-grafico.showLineChart(canvas);
-}
-setLanguage('en-us');
-
-$(document).ready(function(){
- translateText();
- });
-
- $('#savechart').click(function(){
-   $("#myChart").get(0).toBlob(function(blob){
-     saveAs(blob, "textgene_chart.png");
-   });
- });
+  $('#savechart').click(function(){
+    $("#myChart").get(0).toBlob(function(blob){
+      saveAs(blob, "textgene_chart.png");
+    });
+  });
 </script>
 
 <script>
@@ -160,13 +128,8 @@ grafico.showLineChart(canvas);
 
 </script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
-<!-- Bootstrap core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
-<!-- MDB core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.9/js/mdb.min.js"></script>
-
-
-
 <script src="js/script.js"></script>
 </body>
 

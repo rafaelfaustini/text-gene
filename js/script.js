@@ -2,8 +2,6 @@ let coeficienteTempo=0; // Coeficiente para ajustar o tempo em troca de populaç
 let popula = new Array();
 let pensamento = new Array();
 let geracao = 0;
-let quantidade_pop;
-let tamanho_nome;
 let soma_pesos = 0;
 let soma_fitness = 0;
 let population;
@@ -31,13 +29,13 @@ function inputMutacao(obj){
 }
 
 function toggleDinamica(obj){
- dinamica = !dinamica;
- $("#formMutacao").hide();
- if(!dinamica){
-   muta = 0.1
-   $("#formMutacao").show();
- }
- reinicia();
+  dinamica = !dinamica;
+  $("#formMutacao").hide();
+  if(!dinamica){
+    muta = 0.1
+    $("#formMutacao").show();
+  }
+  reinicia();
 }
 
 function taxa_dinamica(tax) {
@@ -118,7 +116,6 @@ function criar_pop(n, nome) {
   popula.length = 0;
   geracao = 0;
   let len = nome.length;
-  quantidade_pop = n;
   let word;
   let pessoa = function(gene, fitness) { // Colocar o objeto pessoa no vetor
     this.gene = gene;
@@ -152,7 +149,6 @@ function dynamicSort(property) {
   }
 }
 
-
 function similaridade(s1, s2){
   var count = 0
   tamanho = s1.length;
@@ -166,9 +162,8 @@ function similaridade(s1, s2){
   return porcentagem/100;
 }
 
-
 function fitness() {
-  quantidade_pop = popula.length;
+  let quantidade_pop = popula.length;
   soma_pesos = 0;
   soma_fitness = 0;
   var count = 0;
@@ -184,7 +179,7 @@ function fitness() {
 }
 
 function checar() {
-  quantidade_pop = popula.length;
+  let quantidade_pop = popula.length;
   for (let i = 0; i < quantidade_pop; i++) {
     if (popula[i].gene == nome) {
       return false;
@@ -193,7 +188,6 @@ function checar() {
     }
   }
 }
-
 
 function selecionar(soma) {
   peso_aleatorio = parseInt(random(1, soma));
@@ -214,45 +208,33 @@ function selecionar(soma) {
       break;
     }
   }
-
-
-}
-
-function isDinamica(){
-return dinamica;
 }
 
 function procriar() {
   let temp = new Array;
-  quantidade_pop = popula.length;
-  tamanho_nome = nome.length;
+  let quantidade_pop = popula.length;
+  var tamanho_nome = nome.length;
   for (v = 0; v < quantidade_pop; v++) {
     selecionar(soma_pesos);
     var valor=mutacao_l;
-    if(isDinamica()){
+    if(dinamica){
       valor = taxa_dinamica(muta)
     }
-
-    let tmp = mutacao(popula[pai_index].gene.substr(0, (tamanho_nome / 2)) + popula[mae_index].gene.substr(tamanho_nome / 2, tamanho_nome), valor);
-    append(temp, tmp)
+  let tmp = mutacao(popula[pai_index].gene.substr(0, (tamanho_nome / 2)) + popula[mae_index].gene.substr(tamanho_nome / 2, tamanho_nome), valor);
+  append(temp, tmp)
   }
   for (i = 0; i < quantidade_pop; i++) {
-
     popula[i].gene = temp[i];
   }
   temp = [];
-  geracao += 1;
+  geracao++;
   fitness();
-
- let maior = popula[0];
+  let maior = popula[0];
   if(geracao< 60 || geracao%10==0 || maior.fitness == 1){
-   let valor = formataFit(popula[0].fitness)
-   grafico.add(0, valor, geracao);
-   grafico.add(1, muta*100,geracao)
-
-}
-
-
+    let valor = formataFit(popula[0].fitness)
+    grafico.add(0, valor, geracao);
+    grafico.add(1, muta*100,geracao)
+  }
 }
 function reinicia(){
   noLoop();
@@ -312,37 +294,36 @@ function showGeracao(numero){
   document.getElementById("geracao").innerHTML = language.generation+" " + numero;
 }
 function showMaiorFit(numero){
-numero = formataFit(numero)
+  numero = formataFit(numero)
   document.getElementById("maior_fit").innerHTML = language.best +" " +" " +" " +" " +" " + numero + "%";
 }
 function showMediaFit(soma, tamanhoPop){
-    let media_fit = (soma / tamanhoPop) / 100;
-    media_fit = formataNumero(media_fit);
-    document.getElementById("media_fit").innerHTML = language.average +" " + media_fit + "%"
+  let media_fit = (soma / tamanhoPop) / 100;
+  media_fit = formataNumero(media_fit);
+  document.getElementById("media_fit").innerHTML = language.average +" " + media_fit + "%"
 }
 function showTempoDecorrido(){
   tempo = millis() - coeficienteTempo;
   if(tempo> 1000){
-      document.getElementById("tempo_geracao").innerHTML = language.elapsed +" " + (tempo/1000).toFixed(1) + ' s';
+    document.getElementById("tempo_geracao").innerHTML = language.elapsed +" " + (tempo/1000).toFixed(1) + ' s';
   } else {
-      document.getElementById("tempo_geracao").innerHTML = language.elapsed +" " + tempo.toFixed(1) + ' ms';
+    document.getElementById("tempo_geracao").innerHTML = language.elapsed +" " + tempo.toFixed(1) + ' ms';
   }
 }
 function showFrase(frase){
-    document.getElementById("frase").innerHTML = frase;
+  document.getElementById("frase").innerHTML = frase;
 }
 function showMutacao(valor, dinAtivada){
-    valor *= 100;
-    valor = formataNumero(valor);
-    var str = language.mutation;
-    if(dinAtivada){
-      str= language.dinamic;
-    }
-    str+=" "
-    document.getElementById("muta_din").innerHTML = str + valor + '%';
+  valor = formataNumero(valor*100);
+  var str = language.mutation;
+  if(dinAtivada){
+    str= language.dinamic;
+  }
+  str+=" "
+  document.getElementById("muta_din").innerHTML = str + valor + '%';
 }
 function showListaPop(text){
-    document.getElementById("list_popula").innerHTML = text;
+  document.getElementById("list_popula").innerHTML = text;
 }
 
 function checarFim(e){
@@ -356,9 +337,7 @@ function checarFim(e){
 }
 
 function generatePopStr(){
-  quantidade_pop = popula.length;
-  let quantidade_dinamica = quantidade_pop;
-
+  let quantidade_dinamica = popula.length;
   let str = language.population+" <br>";
   switch (population) {
     case population >= 500 && population < 800:
@@ -378,7 +357,7 @@ function generatePopStr(){
     if (i % 20 == 0 && i != 0)
     str += "\n";
   }
-       showListaPop(str)
+  showListaPop(str)
 }
 
 function isOver(){
@@ -389,7 +368,7 @@ function isOver(){
 
 function draw() {
   isOver();
-  var maiorElemento = popula[0]
+  let maiorElemento = popula[0]
   checarFim(maiorElemento)
   showFrase(maiorElemento.gene)
   showGeracao(geracao)
