@@ -26,5 +26,10 @@ You are now able to export the chart as png
 ## Contribution
 Feel free to contribute to improve the code !
 
-## License (GPL 3.0)
-You may copy, distribute and modify the software as long as you track changes/dates in source files. Any modifications to or software including (via compiler) GPL-licensed code must also be made available under the GPL along with build & install instructions.
+
+# License
+
+This project is licensed under the GPL V3 License - see the [LICENSE.md](LICENSE.md) file for details.
+
+
+
