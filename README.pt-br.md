@@ -22,5 +22,10 @@ O sistema multilingual usa JSON e tona fácil o trabalho de traduzir a página, 
 ## Contribuição
 Sinta-se livre para contribuir com ideias ou até mesmo com código !
 
-## Licença (GPL 3.0)
-"You may copy, distribute and modify the software as long as you track changes/dates in source files. Any modifications to or software including (via compiler) GPL-licensed code must also be made available under the GPL along with build & install instructions."
+# Licença
+
+Este projeto está sob a licença GPL V3 License - olhe o [LICENSE.md](LICENSE.md) para mais detalhes
+
+
+
+
