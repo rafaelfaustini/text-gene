@@ -130,7 +130,6 @@ function criar_pop(n, nome) {
     }
     pessoa.gene = word;
     append(popula, new pessoa(word, 0))
-    word = undefined;
   }
 }
 
@@ -192,7 +191,6 @@ function selecionar(pais,soma) {
   quantidade_pop = popula.length;
   let next = 0;
   let seen = 0;
-
   pais.pai = 0;
   pais.mae = 0;
 
