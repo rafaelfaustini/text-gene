@@ -9,8 +9,6 @@ var nome;
 var mutacao_l = 5;
 let soma = 0;
 let muta = 0.05;
-let pai_index = 0;
-let mae_index = 0;
 let trigger = false;
 let dinamica = true;
 $("#formMutacao").hide();
@@ -189,22 +187,24 @@ function checar() {
   }
 }
 
-function selecionar(soma) {
+function selecionar(pais,soma) {
   peso_aleatorio = parseInt(random(1, soma));
   peso_aleatorio2 = parseInt(random(1, soma));
   quantidade_pop = popula.length;
   let next = 0;
   let seen = 0;
-  pai_index = 0;
-  mae_index = 0;
+
+  pais.pai = 0;
+  pais.mae = 0;
+
   for (i = 0; i < quantidade_pop; i++) {
     next += popula[i].fitness;
     if (seen < peso_aleatorio <= seen + next) {
-      pai_index = i;
+      pais.pai = i;
       break;
     }
     if (seen < peso_aleatorio2 <= seen + next) {
-      mae_index = i;
+      pais.mae = i;
       break;
     }
   }
@@ -214,13 +214,14 @@ function procriar() {
   let temp = new Array;
   let quantidade_pop = popula.length;
   var tamanho_nome = nome.length;
+  var pais = {} // Pais é passado por referência, quando passado por parâmetro aponta para o objeto
   for (v = 0; v < quantidade_pop; v++) {
-    selecionar(soma_pesos);
+    selecionar(pais,soma_pesos);
     var valor=mutacao_l;
     if(dinamica){
       valor = taxa_dinamica(muta)
     }
-  let tmp = mutacao(popula[pai_index].gene.substr(0, (tamanho_nome / 2)) + popula[mae_index].gene.substr(tamanho_nome / 2, tamanho_nome), valor);
+  let tmp = mutacao(popula[pais.pai].gene.substr(0, (tamanho_nome / 2)) + popula[pais.mae].gene.substr(tamanho_nome / 2, tamanho_nome), valor);
   append(temp, tmp)
   }
   for (i = 0; i < quantidade_pop; i++) {
@@ -257,8 +258,12 @@ function frase(obj){
 }
 
 function pop_slider(obj){
-  population = obj.value;
-  document.getElementById("pop_label").innerHTML = language.population+" "+obj.value+" "+language.elements;
+  population = obj.value
+  let string= language.population
+  string += " "
+  string += obj.value
+  string +=language.elements
+  document.getElementById("pop_label").innerHTML = string;
   reinicia();
 }
 
