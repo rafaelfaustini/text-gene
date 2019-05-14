@@ -6,7 +6,6 @@ let soma_pesos = 0;
 let soma_fitness = 0;
 let population;
 var nome;
-var mutacao_l = 5;
 let soma = 0;
 let muta = 0.05;
 let trigger = false;
@@ -217,7 +216,7 @@ function procriar() {
   var pais = {} // Pais é passado por referência, quando passado por parâmetro aponta para o objeto
   for (v = 0; v < quantidade_pop; v++) {
     selecionar(pais,soma_pesos);
-    var valor=mutacao_l;
+    var valor=muta;
     if(dinamica){
       valor = taxa_dinamica(muta)
     }
