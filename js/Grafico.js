@@ -1,6 +1,8 @@
+console.log("AMEM")
 class Grafico{
   constructor(listaLabels){
     var vetorDatasets = [];
+    try{
     for(let i = 0; i<listaLabels.length; i++){
       var r = Math.floor((Math.random() * 255) + 1);
       var g = Math.floor((Math.random() * 255) + 1);
@@ -49,7 +51,6 @@ class Grafico{
      display: true,
      fontColor: '#fff',
      text: language.title
-
  },
  scales: {
      yAxes: [{
@@ -66,6 +67,9 @@ class Grafico{
 
 }
     };
+  } catch(err){
+console.log(err)
+  }
 
   }
 
